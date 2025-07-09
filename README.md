@@ -1,8 +1,9 @@
+<p align="center">
+  <img src="assets/iccv2025_logo.svg" alt="ICCV 2025" height="100">
+</p>
+
 # Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction [ICCV 2025 🌺]
 
-[![Project Page](https://img.shields.io/badge/Project-Page-blue)]([https://aimagelab.github.io/DICE](https://github.com/aimagelab/ScanDiff))
-[![arXiv](https://img.shields.io/badge/arXiv-Paper-red)](https://arxiv.org/abs/2505.20405)
-[![GitHub](https://img.shields.io/badge/GitHub-Code-black)]([https://github.com/aimagelab/DICE](https://github.com/aimagelab/ScanDiff))
 
 Official implementation of "Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction", ICCV 2025 🌺
 
