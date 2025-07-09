@@ -7,6 +7,8 @@
 
 Official implementation of "Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction", ICCV 2025 🌺
 
+## Code coming soon
+
 ## Citation
 
 If you find this work useful for your research, please cite our paper:
