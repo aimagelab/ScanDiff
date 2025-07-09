@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/iccv2025_logo.svg" alt="ICCV 2025" height="100">
+  <img src="assets/iccv2025_logo.svg" alt="ICCV 2025" height="70">
 </p>
 
 # Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction [ICCV 2025 🌺]
