@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="What Changed? Detecting and Evaluating Instruction-Guided Image Edits with Multimodal Large Language Models">
+  <meta name="keywords" content="Image Editing, MLLMs, Evaluation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What Changed? Detecting and Evaluating Instruction-Guided Image Edits with Multimodal Large Language Models
+  </title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+  <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="https://keunhong.com">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://hypernerf.github.io">
+              HyperNeRF
+            </a>
+            <a class="navbar-item" href="https://nerfies.github.io">
+              Nerfies
+            </a>
+            <a class="navbar-item" href="https://latentfusion.github.io">
+              LatentFusion
+            </a>
+            <a class="navbar-item" href="https://photoshape.github.io">
+              PhotoShape
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </nav> -->
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">What Changed? Detecting and Evaluating Instruction-Guided Image
+              Edits with Multimodal Large Language Models</h1>
+            <div class="is-size-5 publication-authors">
+              <h1 class="title is-4" style="color: #5c5c5c;">ICCV 2025</h1>
+              <span class="author-block">
+                <a href="https://lorenzbaraldi.github.io/">Lorenzo Baraldi</a>*<sup>1,2</sup>,</span>
+              <span class="author-block">
+                <a href="https://aimagelab.ing.unimore.it/imagelab/person.asp?idpersona=190">Davide
+                  Bucciarelli</a>*<sup>1,2</sup>,</span>
+              <span class="author-block">
+                <a href="#">Federico Betti</a>*<sup>3</sup>,</span>
+              <span class="author-block">
+                <a href="https://aimagelab.ing.unimore.it/imagelab/person.asp?idpersona=90">Marcella
+                  Cornia</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.lorenzobaraldi.com/">Lorenzo Baraldi</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="#">Nicu Sebe</a><sup>3</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.ritacucchiara.it/">Rita Cucchiara</a><sup>1,4</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>University of Modena and Reggio Emilia, Italy,</span>
+              <span class="author-block"><sup>2</sup>University of Pisa, Italy,</span>
+              <span class="author-block"><sup>3</sup>University of Trento, Italy,</span>
+              <span class="author-block"><sup>4</sup>IIT-CNR, Italy</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <!-- <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span> -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2505.20405" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span> -->
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://aimagelab.github.io/DICE" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-globe"></i>
+                    </span>
+                    <span>Project Page</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://github.com/aimagelab/DICE" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Dataset Link. -->
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h2 class="subtitle has-text-centered">
+          We present <span class="dice">DICE</span>, a novel framework to detect and evaluate instruction-guided image
+          edits by identifying differences
+          between original and edited images and assessing their coherence with the editing prompt.
+        </h2>
+        <img src="static/images/teaser.png" alt="DICE Teaser" width="100%">
+      </div>
+    </div>
+  </section>
+
+
+  <!-- <section class="hero is-light is-small">
+    <div class="hero-body">
+      <div class="container">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item item-steve">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/steve.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-chair-tp">
+            <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/chair-tp.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-shiba">
+            <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/shiba.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-fullbody">
+            <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/fullbody.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-blueshirt">
+            <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/blueshirt.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-mask">
+            <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/mask.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-coffee">
+            <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/coffee.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-toby">
+            <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/toby2.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Instruction-based image editing models offer increased personalization opportunities in generative tasks.
+              However, properly evaluating their results is challenging, and most of the existing metrics lag in terms
+              of alignment with human judgment and explainability.
+            </p>
+            <p>
+              To tackle these issues, we introduce <strong><span class="dice">DICE</span></strong>
+              (<strong>DI</strong>fference
+              <strong>C</strong>oherence <strong>E</strong>stimator), a model designed to detect localized differences
+              between the original and the edited image and to assess their relevance to the given modification request.
+              <span class="dice">DICE</span> consists of two key components: a difference detector and a coherence
+              estimator, both built on an
+              autoregressive Multimodal Large Language Model (MLLM) and trained using a strategy that leverages
+              self-supervision, distillation from inpainting networks, and full supervision.
+            </p>
+            <p>
+              Through extensive experiments, we evaluate each stage of our pipeline, comparing different MLLMs within
+              the proposed framework. We demonstrate that <span class="dice">DICE</span> effectively identifies coherent
+              edits, effectively
+              evaluating images generated by different editing models with a strong correlation with human judgment.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+      <!-- Method Overview -->
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3 has-text-centered">Method Overview</h2>
+          <div class="content has-text-centered">
+            <img src="static/images/model.png" alt="DICE Method Overview" width="100%">
+            <p class="has-text-justified">
+              Our <span class="dice">DICE</span> framework consists of two main components:
+            </p>
+            <ul class="has-text-left">
+              <li><strong>Difference Detector:</strong> Identifies localized differences between the original and edited
+                images</li>
+              <li><strong>Coherence Estimator:</strong> Assesses the relevance of detected changes with respect to the
+                editing prompt</li>
+            </ul>
+            <p class="has-text-justified">
+              Both components are built on an autoregressive Multimodal Large Language Model (MLLM) and trained using a
+              combination of self-supervision, distillation from inpainting networks, and full supervision.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3 has-text-centered">Difference Detection</h2>
+          <div class="content has-text-centered">
+
+            <p>
+              The <strong>difference detection</strong> module in <span class="dice">DICE</span> uses a Multimodal Large
+              Language Model (MLLM) to
+              identify and
+              localize semantic changes between original and edited images at the object level.
+              The task is framed as structured text generation, where the model outputs <em>(command, object, bounding
+                box)</em>
+              triplets describing localized modifications categorized as <strong>ADD</strong>, <strong>REMOVE</strong>,
+              or
+              <strong>EDIT</strong>.
+              These predictions are independent of the user prompt and serve as the basis for coherence evaluation.
+            </p>
+
+            <p>The model is trained in two stages:</p>
+            <ul>
+              <li>
+                <strong>Stage 1</strong>: Trained on visually similar image pairs from the LVIS dataset, selected using
+                DINOv2
+                embeddings. The model learns to detect object-level differences by identifying which instances appear in
+                one image
+                but not in the other.
+              </li>
+              <li>
+                <strong>Stage 2</strong>: Fine-tuned on synthetically edited image pairs created via LaMa and Kandinsky
+                inpainting.
+                This stage introduces controlled object-level operations—additions, deletions, and replacements—allowing
+                the model
+                to generalize to diverse edit types.
+              </li>
+            </ul>
+            <div class="carousel-container" style="width: 75%; margin: auto;">
+              <div id="difference-detection-carousel" class="carousel results-carousel">
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_1_part_1.png"
+                    alt="DICE Difference Detection Example 1">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_1_part_2.png"
+                    alt="DICE Difference Detection Example 2">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_1_part_3.png"
+                    alt="DICE Difference Detection Example 3">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_1_part_4.png"
+                    alt="DICE Difference Detection Example 4">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_1_part_5.png"
+                    alt="DICE Difference Detection Example 5">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_1_part_6.png"
+                    alt="DICE Difference Detection Example 6">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_1_part_7.png"
+                    alt="DICE Difference Detection Example 7">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_1_part_8.png"
+                    alt="DICE Difference Detection Example 8">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_2_part_1.png"
+                    alt="DICE Difference Detection Example 9">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_2_part_2.png"
+                    alt="DICE Difference Detection Example 10">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_2_part_3.png"
+                    alt="DICE Difference Detection Example 11">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_2_part_4.png"
+                    alt="DICE Difference Detection Example 12">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_2_part_5.png"
+                    alt="DICE Difference Detection Example 13">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_2_part_6.png"
+                    alt="DICE Difference Detection Example 14">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_2_part_7.png"
+                    alt="DICE Difference Detection Example 15">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_2_part_8.png"
+                    alt="DICE Difference Detection Example 16">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_3_part_1.png"
+                    alt="DICE Difference Detection Example 17">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_3_part_2.png"
+                    alt="DICE Difference Detection Example 18">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_3_part_3.png"
+                    alt="DICE Difference Detection Example 19">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_3_part_4.png"
+                    alt="DICE Difference Detection Example 20">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_3_part_5.png"
+                    alt="DICE Difference Detection Example 21">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_3_part_6.png"
+                    alt="DICE Difference Detection Example 22">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_3_part_7.png"
+                    alt="DICE Difference Detection Example 23">
+                </div>
+                <div class="item">
+                  <img src="./static/images/cropped_qualitatives/supp_3_part_8.png"
+                    alt="DICE Difference Detection Example 24">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Method Overview -->
+
+      <!-- Paper video. -->
+      <!-- <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Video</h2>
+          <div class="publication-video">
+            <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0" frameborder="0"
+              allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div> -->
+      <!--/ Paper video. -->
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+
+      <div class="columns is-centered has-text-centered">
+
+        <!-- Visual Effects. -->
+        <div class="column is-four-fifths">
+          <div class="content">
+            <h2 class="title is-3">Coherence Estimation</h2>
+            <p>
+              The <strong>coherence estimation</strong> module in <span class="dice">DICE</span> evaluates whether each
+              detected object-level
+              change aligns
+              with the user's editing instruction.
+              It builds upon the same MLLM architecture as the difference detector and takes as input the original and
+              edited
+              images, the localized bounding box of the change, and the associated modification type.
+              The model outputs a binary decision (<em>YES</em>/<em>NO</em>) along with a textual rationale, determining
+              if the
+              modification is semantically consistent with the prompt.
+            </p>
+
+            <p>The model is trained with manually annotated samples from the EmuEdit dataset are used to provide
+              ground-truth
+              labels of detected differences and coherence for object-level changes. These include both binary labels
+              and natural language
+              explanations.
+
+            </p>
+            <div class="carousel-container">
+              <div id="results-carousel" class="carousel results-carousel">
+                <div class="item">
+                  <img src="./static/images/slide_show/element_1.png" alt="DICE Example 1">
+                </div>
+                <div class="item">
+                  <img src="./static/images/slide_show/element_2.png" alt="DICE Example 2">
+                </div>
+                <div class="item">
+                  <img src="./static/images/slide_show/element_3.png" alt="DICE Example 3">
+                </div>
+                <div class="item">
+                  <img src="./static/images/slide_show/element_4.png" alt="DICE Example 4">
+                </div>
+                <div class="item">
+                  <img src="./static/images/slide_show/element_5.png" alt="DICE Example 5">
+                </div>
+                <div class="item">
+                  <img src="./static/images/slide_show/element_6.png" alt="DICE Example 6">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/ Visual Effects. -->
+
+        <!-- Matting. -->
+        <!-- <div class="column">
+          <h2 class="title is-3">Matting</h2>
+          <div class="columns is-centered">
+            <div class="column content">
+              <p>
+                As a byproduct of our method, we can also solve the matting problem by ignoring
+                samples that fall outside of a bounding box during rendering.
+              </p>
+              <video id="matting-video" controls playsinline height="100%">
+                <source src="./static/videos/matting.mp4" type="video/mp4">
+              </video>
+            </div>
+
+          </div>
+        </div> -->
+      </div>
+      <!--/ Matting. -->
+
+
+
+      <!-- Results -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Quantitative Results</h2>
+
+          <!-- Quantitative Results -->
+          <div class="content has-text-justified">
+            <div class="column is-10 is-offset-1">
+              <figure class="image mb-6">
+                <img src="static/images/Table 1.png" alt="Table 1: Difference Detection Performance"
+                  style="width: 100%;">
+                <figcaption class="has-text-centered mt-2">Performance comparison of various MLLMs in the difference
+                  detection stage of our pipeline, evaluated under both
+                  class-agnostic and class-aware settings. Results are presented in terms of AP metrics across various
+                  training
+                  configurations.
+                </figcaption>
+              </figure>
+              <figure class="image">
+                <img src="static/images/Table 3.png" alt="Table 3: Coherence Estimation Results" style="width: 100%;">
+                <figcaption class="has-text-centered mt-2">Benchmark comparison of model rankings generated by <span
+                    class="dice">DICE</span> and
+                  those derived from the user study. The first two columns
+                  contrast average human ratings with scores obtained using <span class="dice">DICE</span>. The final
+                  column compares the percentage of unchanged
+                  images in the user study -- cases with maximal background preservation and minimal prompt adherence --
+                  to the
+                  corresponding one identified by <span class="dice">DICE</span>.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+
+
+        </div>
+  </section>
+
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@inproceedings{cartella2025modeling,
+  title     = {Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction},
+  author    = {Cartella, Giuseppe and Cuculo, Vittorio and D'Amelio, Alessandro and Cornia, Marcella and Boccignone, Giuseppe and Cucchiara, Rita},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  year      = {2025}
+}</code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <!--         <a class="icon-link" href="#">
+          <i class="fas fa-file-pdf"></i>
+        </a> -->
+        <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p>
+              This means you are free to borrow the <a href="https://github.com/nerfies/nerfies.github.io">source
+                code</a> of this website,
+              we just ask that you link back to this page in the footer.
+              Please remember to remove the analytics code included in the header of the website which
+              you do not want on your website.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
