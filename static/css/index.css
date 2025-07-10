@@ -200,9 +200,27 @@ body {
   color: #4285f4;
 }
 
+
 .carousel-container {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 0px 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.results-carousel .item {
+  display: flex;
+  justify-content: center; /* Horizontal center */
+  align-items: center;    /* Vertical center */
+  height: 400px;          /* Set a fixed height for carousel items */
+}
+
+.results-carousel .item img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;    /* Keep aspect ratio */
 }

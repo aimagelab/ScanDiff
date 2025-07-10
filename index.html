@@ -127,6 +127,154 @@
     </div>
   </section>
 
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body has-text-centered">
+        <h2 class="subtitle has-text-centered">
+          We propose <span class="scandiff">ScanDiff</span>, a unified architecture that integrates diffusion models with
+          Vision Transformers to generate diverse and realistic gaze scanpaths. Unlike existing approaches, ScanDiff
+          explicitly models scanpath variability by leveraging the stochastic nature of diffusion models, enabling
+          the generation of diverse yet plausible gaze trajectories.
+        </h2>
+        <img src="assets/teaser.png" alt="ScanDiff Teaser" width="70%">
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Predicting human gaze scanpaths is crucial for understanding visual attention, 
+              with applications in human-computer interaction, autonomous systems, and cognitive robotics. 
+            </p>
+
+            <p>
+              While deep learning models have advanced scanpath prediction, most existing approaches generate averaged behaviors, 
+              failing to capture the variability of human visual exploration. In this work, we present <span class="scandiff">ScanDiff</span>, a novel architecture
+              that combines diffusion models with Vision Transformers to generate diverse and realistic scanpaths.
+            </p>
+            
+            <p>
+              Our method explicitly 
+              models scanpath variability by leveraging the stochastic nature of diffusion models, producing a wide range of plausible gaze trajectories. 
+              Additionally, we introduce textual conditioning to enable task-driven scanpath generation, allowing the model to adapt to different visual 
+              search objectives.
+            </p>
+
+            <p>
+              Experiments on benchmark datasets show that <span class="scandiff">ScanDiff</span> surpasses state-of-the-art methods in both free-viewing and task-driven 
+              scenarios, producing more diverse and accurate scanpaths. These results highlight its ability to better capture the complexity of human visual behavior, 
+              pushing forward gaze prediction research.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+      <!-- Method Overview -->
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3 has-text-centered">Method Overview</h2>
+          <div class="content has-text-centered">
+            <img src="assets/model.png" alt="ScanDiff Method Overview" width="80%">
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3 has-text-centered">Qualitative Results</h2>
+          <div class="content has-text-centered">
+            <div class="carousel-container" style="width: 90%; margin: auto;">
+              <div id="difference-detection-carousel" class="carousel results-carousel">
+                <div class="item">
+                  <img src="./assets/qualitatives/example1.png"
+                    alt="Scandiff Qualitatives Example 1">
+                </div>
+                <div class="item">
+                  <img src="./assets/qualitatives/example1.png"
+                    alt="Scandiff Qualitatives Example 1">
+                </div>
+                <div class="item">
+                  <img src="./assets/qualitatives/example2.png"
+                    alt="Scandiff Qualitatives Example 2">
+                </div>
+                <div class="item">
+                  <img src="./assets/qualitatives/example3.png"
+                    alt="Scandiff Qualitatives Example 3">
+                </div>
+                <div class="item">
+                  <img src="./assets/qualitatives/example4.png"
+                    alt="Scandiff Qualitatives Example 4">
+                </div>
+                <div class="item">
+                  <img src="./assets/qualitatives/example5.png"
+                    alt="Scandiff Qualitatives Example 5">
+                </div>
+                <div class="item">
+                  <img src="./assets/qualitatives/example6.png"
+                    alt="Scandiff Qualitatives Example 6">
+                </div>
+                <div class="item">
+                  <img src="./assets/qualitatives/example7.png"
+                    alt="Scandiff Qualitatives Example 7">
+                </div>
+                <div class="item">
+                  <img src="./assets/qualitatives/example8.png"
+                    alt="Scandiff Qualitatives Example 8">
+                </div>
+                <div class="item">
+                  <img src="./assets/qualitatives/example9.png"
+                    alt="Scandiff Qualitatives Example 9">
+                </div>
+                <div class="item">
+                  <img src="./assets/qualitatives/example10.png"
+                    alt="Scandiff Qualitatives Example 10">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3 has-text-centered">Scanpath Variability Analysis</h2>
+          <div class="content has-text-centered">
+            <div class="carousel-container" style="width: 90%; margin: auto;">
+              <div id="difference-detection-carousel" class="carousel results-carousel">
+                <div class="item">
+                  <img src="./assets/variability_imgs/example1.png"
+                    alt="Scandiff Variability Example 1">
+                </div>
+                <div class="item">
+                  <img src="./assets/variability_imgs/example2.png"
+                    alt="Scandiff Variability Example 2">
+                </div>
+                <div class="item">
+                  <img src="./assets/variability_imgs/example3.png"
+                    alt="Scandiff Variability Example 3">
+                </div>
+                <div class="item">
+                  <img src="./assets/variability_imgs/example4.png"
+                    alt="Scandiff Variability Example 4">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Method Overview -->
+
+    </div>
+  </section>
+
+
 
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
