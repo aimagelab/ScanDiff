@@ -2,9 +2,6 @@
   <img src="assets/iccv2025_logo.svg" alt="ICCV 2025" height="70">
 </p>
 
-
-
-
 <div align="center">
 <img align="left" height="75" style="margin-left: 20px" src="assets/logo.png" alt="">
 
