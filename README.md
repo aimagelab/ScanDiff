@@ -16,7 +16,7 @@ Official implementation of "Modeling Human Gaze Behavior with Diffusion Models f
 ## Overview
 
 <p align="center">
-    <img src="figure.jpg">
+    <img src="assets/figure.jpg">
 </p>
 
 >**Abstract**: <br>
