@@ -2,16 +2,26 @@
   <img src="assets/iccv2025_logo.svg" alt="ICCV 2025" height="70">
 </p>
 
-# Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction
-Official implementation of "Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction", ICCV 2025 🌺
 
-### Authors
+
+
+<div align="center">
+<img align="left" height="75" style="margin-left: 20px" src="assets/logo.png" alt="">
+
+
+# Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction
+
 [**Giuseppe Cartella**](https://scholar.google.com/citations?hl=en&user=0sJ4VCcAAAAJ),
 [**Vittorio Cuculo**](https://scholar.google.com/citations?hl=en&user=usEfqxoAAAAJ&hl=it&oi=ao),
 [**Alessandro D'Amelio**](https://scholar.google.com/citations?user=chkawtoAAAAJ&hl=en&oi=ao),
 [**Marcella Cornia**](https://scholar.google.com/citations?hl=en&user=DzgmSJEAAAAJ),
 [**Giuseppe Boccignone**](https://scholar.google.com/citations?user=LqM0uJwAAAAJ&hl),
 [**Rita Cucchiara**](https://scholar.google.com/citations?hl=en&user=OM3sZEoAAAAJ)
+</div>
+
+Official implementation of "Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction", ICCV 2025 🌺
+
+
 
 ## Overview
 
