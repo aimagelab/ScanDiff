@@ -1,7 +1,7 @@
-<p align="center">
-  <img align="left" height="90" style="margin-left: 20px" src="assets/logo.png" alt="">
+<div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+  <img src="assets/logo.png" alt="Logo" height="90">
   <img src="assets/iccv2025_logo.svg" alt="ICCV 2025" height="55">
-</p>
+</div>
 
 <div align="center">
   
