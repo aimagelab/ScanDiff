@@ -1,10 +1,11 @@
-<div align="center">
-
-<div style="display: flex; align-items: center; justify-content: center; column-gap: 40px; margin-bottom: 20px;">
-  <img src="assets/logo.png" alt="Logo" height="90">
+<p align="center">
   <img src="assets/iccv2025_logo.svg" alt="ICCV 2025" height="55">
-</div>
-  
+</p>
+
+<div align="center">
+<img align="left" height="90" style="margin-left: 20px" src="assets/logo.png" alt="">
+
+# Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction
 # Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction
 
 [**Giuseppe Cartella**](https://scholar.google.com/citations?hl=en&user=0sJ4VCcAAAAJ),
