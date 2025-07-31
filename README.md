@@ -1,9 +1,9 @@
+<div align="center">
+
 <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
   <img src="assets/logo.png" alt="Logo" height="90">
   <img src="assets/iccv2025_logo.svg" alt="ICCV 2025" height="55">
 </div>
-
-<div align="center">
   
 # Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction
 
