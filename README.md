@@ -4,6 +4,7 @@
 </p>
 
 <div align="center">
+  
 # Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction
 
 [**Giuseppe Cartella**](https://scholar.google.com/citations?hl=en&user=0sJ4VCcAAAAJ),
