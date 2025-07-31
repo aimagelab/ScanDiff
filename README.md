@@ -1,6 +1,6 @@
 <div align="center">
 
-<div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+<div style="display: flex; align-items: center; justify-content: center; column-gap: 40px; margin-bottom: 20px;">
   <img src="assets/logo.png" alt="Logo" height="90">
   <img src="assets/iccv2025_logo.svg" alt="ICCV 2025" height="55">
 </div>
