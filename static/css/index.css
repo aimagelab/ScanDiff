@@ -224,3 +224,39 @@ body {
   max-width: 100%;
   object-fit: contain;    /* Keep aspect ratio */
 }
+
+.custom-steps {
+  counter-reset: step-counter;
+  list-style: none;
+  padding-left: 1em;
+}
+
+.custom-steps li {
+  counter-increment: step-counter;
+  margin-bottom: 1em;
+  position: relative;
+  padding-left: 2em;
+  list-style: none;
+}
+
+.custom-steps li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  background: #9e1e63; /* Bulma primary */
+  color: white;
+  border-radius: 50%;
+  width: 1.5em;
+  height: 1.5em;
+  text-align: center;
+  line-height: 1.5em;
+  font-weight: bold;
+}
+
+.math-symbol {
+  font-family: 'Georgia', serif;
+  font-size: 1.05em;
+  /* i want bold font */
+  font-weight: bold;  
+}

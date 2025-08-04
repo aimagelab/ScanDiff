@@ -143,7 +143,7 @@
           explicitly models scanpath variability by leveraging the stochastic nature of diffusion models, enabling
           the generation of diverse yet plausible gaze trajectories.
         </h2>
-        <img src="assets/teaser.png" alt="ScanDiff Teaser" width="70%">
+        <img src="assets/teaser.png" alt="ScanDiff Teaser" width="100%">
       </div>
     </div>
   </section>
@@ -188,16 +188,49 @@
         <div class="column is-full-width">
           <h2 class="title is-3 has-text-centered">Method Overview</h2>
           <div class="content has-text-centered">
-            <img src="assets/model.png" alt="ScanDiff Method Overview" width="80%">
+            <img src="assets/model.png" alt="ScanDiff Method Overview" width="100%"><br><br>
+            <p class="has-text-justified">
+              <span class="scandiff">ScanDiff</span> is based on a unified architecture combining Diffusion Models with Transformers. 
+              It represents the first diffusion-based approach for scanpath prediction on natural images. Textual conditioning allows <span class="scandiff">ScanDiff</span> to work both in free-viewing and task-driven scenarios,
+              and a dedicated length prediction module is introduced to handle variable-length scanpaths.
+
+              <h3>How does the model work?</h3>
+              
+            <!-- begine itemize with numbers-->
+            <ol class="custom-steps has-text-left mt-4">
+              <li><strong>Scanpath embedding:</strong> The scanpath is embedded into the initial uncorrupted latent variable 
+                <span class="math-symbol">z<sub>0</sub></span>.
+              </li>
+              <li><strong>Forward diffusion:</strong> Gaussian noise is added to the embedded sequence 
+                <span class="math-symbol">z<sub>0</sub></span> over <span class="math-symbol">T</span> timesteps.
+              </li>
+              <li><strong>Visual encoding:</strong> The stimulus <span class="math-symbol">I</span> is encoded with a Transformer-based backbone (DINOv2).
+              </li>
+              <li><strong>Task encoding:</strong> A textual encoder (CLIP) processes the viewing task <span class="math-symbol">c</span>.
+              </li>
+              <li><strong>Multimodal fusion:</strong> Visual and textual features are projected into a joint multimodal embedding space.
+              </li>
+              <li><strong>Denoising:</strong> A Transformer encoder refines the noised scanpath embedding 
+                <span class="math-symbol">z<sub>t</sub></span>, conditioned on the multimodal features.
+              </li>
+              <li><strong>Reconstruction:</strong> A three-layer MLP 
+                <span class="math-symbol">γ<sub>θ</sub></span> reconstructs the scanpath, and a length prediction module 
+                <span class="math-symbol">ℓ<sub>θ</sub></span> estimates its length.
+              </li>
+            </ol>
+
+            </p>
           </div>
         </div>
       </div>
+
+      
 
       <div class="columns is-centered">
         <div class="column is-four-fifths">
           <h2 class="title is-3 has-text-centered">Qualitative Results</h2>
           <div class="content has-text-centered">
-            <div class="carousel-container" style="width: 90%; margin: auto;">
+            <div class="carousel-container" style="width: 100%; margin: auto;">
               <div id="difference-detection-carousel" class="carousel results-carousel">
                 <div class="item">
                   <img src="./assets/qualitatives/example1.png"
@@ -250,10 +283,31 @@
       </div>
 
       <div class="columns is-centered">
-        <div class="column is-four-fifths">
+        <div class="column is-full-width">
           <h2 class="title is-3 has-text-centered">Scanpath Variability Analysis</h2>
-          <div class="content has-text-centered">
-            <div class="carousel-container" style="width: 90%; margin: auto;">
+          <div class="content has-text-justified">
+            <p>
+              Human visual exploration is inherently variable. Individuals perceive the same stimulus in different manners depending on factors such as attention, 
+              context, and cognitive processes. Capturing such variability is essential for developing models that accurately reflect the diverse range of
+              human traits. However, existing scanpath prediction models tend to align closely with the statistical mean of human gaze behavior. While this approach may improve performance
+              on traditional evaluation metrics, it fails to reflect the natural variability in human visual attention. Commonly used
+              metrics such as MM, SM, and SS tend to reward predictions that closely match an aggregated ground truth, thus
+              favoring models that generate a single representative scanpath. Indeed, the
+              average similarity between ground-truth scanpaths can be smaller than the average similarity between generated scanpaths if these well reflect an average behavior.
+              <br><br>
+              We propose the <strong>Diversity-aware Sequence Score (DSS)</strong>, a new metric that extends the standard sequence similarity mesures by incorporating
+              a term that penalizes excessive similarity among the generated scanpaths when humans do not reflect such behavior. Given a set of generated scanpaths <span class="math-symbol">s<sub>g</sub></span> and 
+              corresponding human scanpaths <span class="math-symbol">s<sub>h</sub></span> for a specific visual stimulus, DSS is computed as:
+            </p>
+
+            <div class="has-text-centered my-5">
+              <figure class="image is-inline-block">
+                <img src="assets/metric.png" alt="metric" style="width: 40%;">
+              </figure>
+            </div>
+
+            
+            <div class="carousel-container" style="width: 100%; margin: auto;">
               <div id="difference-detection-carousel" class="carousel results-carousel">
                 <div class="item">
                   <img src="./assets/variability_imgs/example1.png"
@@ -273,6 +327,12 @@
                 </div>
               </div>
             </div>
+            <br>
+            This is a first attempt to quantitatively assess the ability of a model to generate diverse, yet human-like, gaze trajectories.
+            <span class="scandiff">ScanDiff</span> achieves the best overall performance on all settings and datasets, highlighting its
+            effectiveness in predicting accurate eye movement trajectories well aligned with the human scanpath variability.
+            Goal-oriented scanpaths tend to be more deterministic, particularly in the target-present setting, and are generally shorter
+            than those in free-viewing scenarios. Nevertheless, our model effectively captures even the more subtle variability present in human gaze behavior.
           </div>
         </div>
       </div>
