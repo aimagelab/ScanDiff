@@ -48,17 +48,25 @@
         <div class="columns is-centered">
           <div class="column has-text-centered">
             <!-- Nuova riga con immagine + scritta sulla stessa linea -->
-            <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                <img src="assets/iccv2025_logo.svg" alt="ICCV Logo" style="height: 60px; margin-right: 0px;">
-                <!-- <span style="font-size: 1.5rem; font-weight: 600; color: #5c5c5c;">ICCV 2025</span> -->
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <div style="display: flex; gap: 80px; justify-content: center; margin-bottom: 20px;">
+                <img src="assets/scandiff_logo.png" alt="Logo Left" style="height: 100px;">
+                <img src="assets/scandiff_logo.png" alt="Logo Right" style="height: 100px; transform: scaleX(-1);">
+              </div>
+              <h1 class="title is-2 publication-title" style="margin-bottom: 30px;">
+                Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction
+              </h1>
             </div>
-
-            <div style="display: flex; align-items: center;">
+            <!-- <div style="display: flex; align-items: center;">
               <img src="assets/scandiff_logo.png" alt="Icon" style="height: 100px; margin-right: 15px;">
               <h1 class="title is-1 publication-title">
                 Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction
               </h1>
               <img src="assets/scandiff_logo.png" alt="Icon" style="height: 100px; margin-left: 15px;">
+            </div> -->
+            <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                <img src="assets/iccv2025_logo.svg" alt="ICCV Logo" style="height: 60px; margin-right: 0px;">
+                <!-- <span style="font-size: 1.5rem; font-weight: 600; color: #5c5c5c;">ICCV 2025</span> -->
             </div>
             <!-- <h1 class="title is-1 publication-title">Modeling Human Gaze Behavior with Diffusion Models for Unified Scanpath Prediction</h1> -->
             <div class="is-size-5 publication-authors">
@@ -95,7 +103,7 @@
                   </a>
                 </span> -->
                 <span class="link-block">
-                  <a href="https://arxiv.org/abs/2507.23021" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://arxiv.org/abs/2507.23021" class="external-link button is-normal is-rounded" style="background-color: rgb(145, 43, 98); color: white;">
                     <span class="icon">
                       <i class="ai ai-arxiv"></i>
                     </span>
@@ -115,7 +123,7 @@
                 <!-- Code Link. -->
 
                 <span class="link-block">
-                  <a href="https://github.com/aimagelab/ScanDiff" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://github.com/aimagelab/ScanDiff" class="external-link button is-normal is-rounded" style="background-color: rgb(145, 43, 98); color: white;">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
@@ -124,11 +132,20 @@
                 </span>
                 <!-- YouTube Link -->
                 <span class="link-block">
-                  <a href="https://www.youtube.com/watch?v=Kev1JMUA61Y" target="_blank" class="external-link button is-normal is-rounded is-danger">
+                  <a href="https://www.youtube.com/watch?v=Kev1JMUA61Y" target="_blank" class="external-link button is-normal is-rounded" style="background-color: rgb(145, 43, 98); color: white;">
                     <span class="icon">
                       <i class="fab fa-youtube"></i>
                     </span>
                     <span>Video Presentation</span>
+                  </a>
+                </span>
+                <!-- Poster Link -->
+                <span class="link-block">
+                  <a href="https://giuseppecartella.github.io/assets/posters/scandiff.pdf" target="_blank" class="external-link button is-normal is-rounded" style="background-color: rgb(145, 43, 98); color: white;">
+                    <span class="icon">
+                      <i class="fas fa-chalkboard"></i>
+                    </span>
+                    <span>Poster</span>
                   </a>
                 </span>
 
