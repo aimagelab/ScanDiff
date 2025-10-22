@@ -1,0 +1,6 @@
+default_collator:
+  _target_: src.data.components.collator.Collator
+  max_len: ${data.max_len}
+  force_initial_central_fixation: false
+  time_in_ms: ${data.time_in_ms}
+  use_abs_coords: ${data.use_abs_coords}

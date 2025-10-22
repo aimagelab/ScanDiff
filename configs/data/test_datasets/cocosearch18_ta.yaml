@@ -1,0 +1,13 @@
+cocosearch18_ta:
+  _target_: src.data.components.cocosearch18.cocosearch18_ta.COCOSearch18TargetAbsentDataset
+  name: cocosearch18_ta
+  root_path: ./data/cocosearch18
+  task: Is there a {<object class>} in the image?
+  split: test #should be [train, valid, test]
+  num_subjects: 10 # each image was viewed by 10 users. Generate 10 scanpaths for each image during generation.
+  time_in_ms: false
+  use_abs_coords: true
+  threshold: 0.353 # this is the human consistency score. Human evaluation of SS Time 
+  threshold_no_dur: 0.377 # this is the human consistency score. Human evaluation of SS Time 
+  task_embeddings_file: embeddings.npy
+  img_features_dir: dinov2_base_timm_image_features_ta

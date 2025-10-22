@@ -1,0 +1,11 @@
+cocosearch18_tp:
+  _target_: src.data.components.cocosearch18.cocosearch18_tp.COCOSearch18TargetPresentDataset
+  name: cocosearch18_tp
+  root_path: ./data/cocosearch18
+  task: Is there a {<object class>} in the image?
+  split: valid #should be [train, valid, test]
+  num_subjects: 10 # each image was viewed by 10 users. Generate 10 scanpaths for each image during generation.
+  time_in_ms: false
+  use_abs_coords: true
+  task_embeddings_file: embeddings.npy
+  img_features_dir: dinov2_base_timm_image_features_tp

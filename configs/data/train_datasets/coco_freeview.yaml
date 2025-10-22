@@ -1,0 +1,12 @@
+coco_freeview:
+  _target_: src.data.components.coco_freeview.coco_freeview.COCOFreeViewDataset
+  name: coco_freeview
+  root_path: ./data/coco_freeview
+  task: What do you see in the image?
+  split: train #should be [train, valid, test]
+  num_subjects: 10 # each image was viewed by 10 users. Generate 10 scanpaths for each image during generation.
+  time_in_ms: false
+  use_abs_coords: true
+  truncate_seconds: 3
+  task_embeddings_file: standard_roberta_embeddings.npy
+  img_features_dir: dinov2_base_timm_image_features

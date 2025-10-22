@@ -1,0 +1,6 @@
+_target_: src.model.components.diffusion_classes.custom_gaussian_diffusion.CustomSpacedDiffusion
+lambda_x: 1
+lambda_y: 1
+lambda_t: 1
+one_step_noise: false
+compute_T_loss: false

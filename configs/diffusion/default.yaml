@@ -1,0 +1,4 @@
+num_timesteps: 1000
+noise_schedule: sqrt
+predict_xstart: true
+sampler: lossaware
