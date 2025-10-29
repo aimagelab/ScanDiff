@@ -4,8 +4,8 @@ defaults:
   - diffusion: default
   - diffusion_class: spaced_diffusion
 
-image_path: "/homes/gcartella/Projects/ScanDiff/data/cocosearch18/images_tp/car/000000491881.jpg"
+image_path: "./sample_images/car.jpg"
 viewing_task: "car"  # empty string for freeviewing, or one of the 18 Coco-Search categories
 checkpoint_path: "./checkpoints/scandiff_visualsearch.pth"
-task_embeddings_path: "/homes/gcartella/Projects/ScanDiff/data/clip_hf_vitb32_embeddings.npy"
+task_embeddings_path: "./data/task_embeddings.npy"
 num_output_scanpaths: 10

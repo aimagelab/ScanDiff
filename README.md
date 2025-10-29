@@ -58,21 +58,34 @@ For more details, visit the [Hydra documentation](https://hydra.cc/docs/intro/)!
 ### 2️⃣ Download Checkpoints
 Download freeviewing and visual search [checkpoints](https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/checkpoints.zip) with the following command:
 ```bash
-wget -O checkpoints.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/checkpoints.zip && unzip checkpoints.zip -d checkpoints && rm checkpoints.zip
+wget -O checkpoints.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/checkpoints.zip && unzip -j checkpoints.zip -d checkpoints && rm checkpoints.zip
+```
+### 3️⃣ Download Task Embeddings
+Download [task embeddings](https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/data.zip) with the following command:
+```bash
+wget -O data.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/data.zip && unzip -j data.zip -d data && rm data.zip
 ```
 
-
-### 3️⃣ Quick Start!
+At this point the project root should look like:
+```shell
+ScanDiff/
+├── data/
+│   └── task_embeddings.npy
+└── checkpoints/
+    ├── scandiff_freeview.pth
+    └── scandiff_visualsearch.pth
+```
+### 4️⃣ Quick Start!
 We provide a simple ```demo.py``` script to generate scanpaths for a certain image
 
 1. Generate scanpaths in the freeviewing setting:
 ```bash
-python demo.py image_path=<image_path> viewing_task="" checkpoint_path=<freeviewing_ckpt_path> num_output_scanpaths=10
+python demo.py image_path=<image_path> viewing_task="" checkpoint_path=./checkpoints/scandiff_freeview.pth num_output_scanpaths=10
 ```
 
 2. Generate scanpaths in the visual search setting:
 ```bash
-python demo.py image_path=<image_path> viewing_task="bottle" checkpoint_path=<freeviewing_ckpt_path> num_output_scanpaths=10
+python demo.py image_path=<image_path> viewing_task="bottle" checkpoint_path=./checkpoints/scandiff_visualsearch.pth num_output_scanpaths=10
 ```
 
 ### 📝 TODO

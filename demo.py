@@ -91,7 +91,6 @@ def main(cfg: DictConfig):
     
     with torch.no_grad():
         initial_noise = torch.randn(num_viewers, max_len, model.scanpath_emb_size).cuda()
-        #initial_noise = torch.load('/homes/gcartella/Projects/ScanDiff/noise.pth').cuda()
         
         y = img_condition
         model_kwargs = dict(y=y, task_embedding=task_embedding)  # img conditioning

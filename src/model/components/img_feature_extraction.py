@@ -40,7 +40,7 @@ class SimpleMIT1003(Dataset):
                                     T.Resize((320 * 2,512 * 2)),
                                     T.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]) #put image in range [-1,1]
         
-        self.imgs = list(Path('/homes/gcartella/Projects/ScanDiff/data', 'mit1003', 'images').glob('*'))
+        self.imgs = list(Path('./data', 'mit1003', 'images').glob('*'))
         
     def __getitem__(self, index):
         img_file = self.imgs[index]
@@ -61,7 +61,7 @@ class SimpleOSIE(Dataset):
                                     T.Resize((320 * 2,512 * 2)),
                                     T.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]) #put image in range [-1,1]
         
-        self.imgs = list(Path('/homes/gcartella/Projects/ScanDiff/data', 'osie', 'images').glob('*'))
+        self.imgs = list(Path('./data', 'osie', 'images').glob('*'))
         
     def __getitem__(self, index):
         img_file = self.imgs[index]
@@ -86,4 +86,4 @@ if __name__ == '__main__':
         print(img_feats.shape)
         
         for img_feat, filename in zip(img_feats, batch['filename']):
-            torch.save(img_feat, Path('/homes/gcartella/Projects/ScanDiff/data/osie/image_features', Path(filename).stem + '.pth'))
+            torch.save(img_feat, Path('./data/osie/image_features', Path(filename).stem + '.pth'))
