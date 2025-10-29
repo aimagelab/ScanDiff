@@ -80,12 +80,12 @@ We provide a simple ```demo.py``` script to generate scanpaths for a certain ima
 
 1. Generate scanpaths in the freeviewing setting:
 ```bash
-python demo.py image_path=<image_path> viewing_task="" checkpoint_path=./checkpoints/scandiff_freeview.pth num_output_scanpaths=10
+python demo.py image_path=./sample_images/dog.jpg viewing_task="" checkpoint_path=./checkpoints/scandiff_freeview.pth num_output_scanpaths=10
 ```
 
 2. Generate scanpaths in the visual search setting:
 ```bash
-python demo.py image_path=<image_path> viewing_task="bottle" checkpoint_path=./checkpoints/scandiff_visualsearch.pth num_output_scanpaths=10
+python demo.py image_path=./sample_images/car.jpg viewing_task="car" checkpoint_path=./checkpoints/scandiff_visualsearch.pth num_output_scanpaths=10
 ```
 
 ### 📝 TODO
