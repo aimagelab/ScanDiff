@@ -1,0 +1,15 @@
+_target_: src.trainer_autoencoder.TrainerAutoencoder
+default_root_dir: ${paths.output_dir}
+
+min_epochs: 1 # prevents early stopping
+max_epochs: 120
+
+validation_every_n_epochs: 1
+test_every_n_epochs: 1
+
+accelerator: cuda
+
+deterministic: False
+learning_rate: 1e-6
+
+

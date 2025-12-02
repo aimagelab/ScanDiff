@@ -1,0 +1,25 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - data: unified_datamodule
+  - model: dit
+  - diffusion: default
+  - diffusion_class: spaced_diffusion
+  - trainer: default
+  - callbacks: default
+  - logger: null
+  - evaluation: default
+  - paths: default
+  - extras: default
+  - hydra: default
+  - slurm: null
+
+task_name: "eval"
+
+tags: ["dev"]
+
+# passing checkpoint path is necessary for evaluation
+ckpt_path: ???
+
+seed: null

@@ -19,7 +19,7 @@ class PositionEmbeddingSine1d(nn.Module):
         self.pos = torch.zeros(max_len, hidden_dim)
         self.pos[:, 0::2] = torch.sin(position * div_term)
         self.pos[:, 1::2] = torch.cos(position * div_term)
-        self.pos = self.pos.unsqueeze(0).to('cpu')  #TODO: REVIEW IF IT IS CORRECT. Why .to('cpu') ?
+        self.pos = self.pos.unsqueeze(0).to('cpu')
 
     def forward(self, x):
         return x + self.pos[:x.size(0), :].to(self.device)

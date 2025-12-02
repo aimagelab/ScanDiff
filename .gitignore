@@ -1,0 +1,7 @@
+logs/
+wandb/
+data/
+outputs/
+*.pyc
+__pycache__/
+.vscode

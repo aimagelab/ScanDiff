@@ -1,5 +1,5 @@
 # Needs to be divisible by the number of devices (e.g., if in a distributed setup)
-batch_size_train: 32
+batch_size_train: 128
 batch_size_validation: 1 #because then replicate the number of generation to simulate the number of observers
 batch_size_test: 1 #because then replicate the number of generation to simulate the number of observers
 num_workers: 8
@@ -10,12 +10,12 @@ drop_last: false
 time_in_ms: false
 use_abs_coords: false
 max_len: 16
-# task_embeddings_file: standard_roberta_embeddings.npy
-# img_features_dir: dinov2_base_timm_image_features_tp
+task_embeddings_file: task_embeddings.npy
 
-# defaults:
-#   - train_datasets: [coco_freeview]
-#   - val_datasets: [coco_freeview]
-#   - train_collators: [default]
-#   - test_datasets: [osie]
-#   - test_collators: [default]
+
+defaults:
+  - train_datasets: [coco_freeview]
+  - val_datasets: [coco_freeview]
+  - train_collators: [default]
+  - test_datasets: [osie]
+  - test_collators: [default]

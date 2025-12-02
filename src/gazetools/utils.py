@@ -66,8 +66,6 @@ def scanpath2clusters(meanshift: MeanShift, scanpath):
 
 def compute_saliency_map(points: np.ndarray, size: Tuple[int, int], method="conv"):
 
-    # points = np.flip(points, 1)
-
     w = size[1]
     h = size[0]
 

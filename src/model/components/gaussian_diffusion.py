@@ -434,7 +434,6 @@ class GaussianDiffusion:
         denoised_fn=None,
         cond_fn=None,
         model_kwargs=None,
-        firstfix=None
     ):
         """
         Sample x_{t-1} from the model at the given timestep.
@@ -468,9 +467,6 @@ class GaussianDiffusion:
             out["mean"] = self.condition_mean(cond_fn, out, x, t, model_kwargs=model_kwargs)
         sample = out["mean"] + nonzero_mask * th.exp(0.5 * out["log_variance"]) * noise
         
-        if firstfix is not None:
-            sample[:,0,:] = firstfix
-        
         return {"sample": sample, "pred_xstart": out["pred_xstart"]}
 
     def p_sample_loop(
@@ -484,7 +480,6 @@ class GaussianDiffusion:
         model_kwargs=None,
         device=None,
         progress=False,
-        firstfix=None
     ):
         """
         Generate samples from the model.
@@ -515,7 +510,6 @@ class GaussianDiffusion:
             model_kwargs=model_kwargs,
             device=device,
             progress=progress,
-            firstfix=firstfix
         ):
             final = sample
         return final["sample"]
@@ -531,7 +525,6 @@ class GaussianDiffusion:
         model_kwargs=None,
         device=None,
         progress=False,
-        firstfix=None
     ):
         """
         Generate samples from the model and yield intermediate samples from
@@ -566,7 +559,6 @@ class GaussianDiffusion:
                     denoised_fn=denoised_fn,
                     cond_fn=cond_fn,
                     model_kwargs=model_kwargs,
-                    firstfix=firstfix
                 )
                 yield out
                 sample_x = out["sample"]
@@ -822,9 +814,7 @@ class GaussianDiffusion:
                 ModelVarType.LEARNED,
                 ModelVarType.LEARNED_RANGE,
             ]:
-                #B, C = x_t.shape[:2]
-                #assert model_output.shape == (B, C * 2, *x_t.shape[2:])
-                #model_output, model_var_values = th.split(model_output, C, dim=1)
+
                 model_output, model_var_values = th.split(model_output, model_output.shape[-1] // 2, dim=2)
                 # Learn the variance using the variational bound, but don't let
                 # it affect our mean prediction.
@@ -850,24 +840,6 @@ class GaussianDiffusion:
             }[self.model_mean_type]
             assert model_output.shape == target.shape == x_start.shape
             
-            # NB: nel caso di un ground truth con 0 fissazioni potrebbe essere lanciata un exception. In teoria i dati di gt sono stati controllati
-            #target_with_mask = target * padding_mask.unsqueeze(-1)
-            #model_output_with_mask = model_output * padding_mask.unsqueeze(-1)
-            
-            #x_loss = ((target_with_mask - model_output_with_mask) ** 2)[:,:,0]
-            #x_loss = x_loss.sum(dim=1) / padding_mask.sum(dim=1)
-            
-            #y_loss = ((target_with_mask - model_output_with_mask) ** 2)[:,:,1]
-            #y_loss = y_loss.sum(dim=1) / padding_mask.sum(dim=1)
-            
-            #time_loss = ((target_with_mask - model_output_with_mask) ** 2)[:,:,2]
-            #time_loss = time_loss.sum(dim=1) / padding_mask.sum(dim=1)
-            
-            #spatial_loss = x_loss + y_loss
-            #terms['spatial_loss'] = spatial_loss
-            #terms['time_loss'] = time_loss
-            #terms['mse'] = spatial_loss + time_loss
-            
             # Loss 1: Mean Squared Error (MSE) (L_{VLB})
             terms["mse"] = mean_flat((target - model_output) ** 2) # this is the L_simple loss
             
@@ -878,19 +850,13 @@ class GaussianDiffusion:
             # update the MSE between the model output and the one-step noised input embeddings (i.e. target) with the MSE between the
             # model output and the embeddings before the one noise step wherever there was no noise received in the noising
             # process (i.e., wherever t was 0)
-            # quindi con questa modifica sto dicendo che ogni qual volta sono allo step 0 allora il mio modello
-            # deve predire la versione denoisata del mio scanpath embeddato.
-            # la t0_loss e praticamente la loss dell embedding. 
+
             terms['mse'] = th.where(t0_mask, t0_loss, terms['mse'])
 
             # Loss 2: L_{round}
             out_mean, _, _ = self.q_mean_variance(x_start, th.LongTensor([self.num_timesteps - 1]).to(x_start.device))
             tT_loss = mean_flat(out_mean ** 2)
-            
-            #if "vb" in terms:
-            #    terms["loss"] = terms["mse"] + terms["vb"]
-            #else:
-            #    terms["loss"] = terms["mse"]
+
 
             # Loss 3: Embedding per passare da 128 a 3 ovvero x,y e tempo
             get_fixations = model.model.get_coords_and_time
@@ -900,8 +866,6 @@ class GaussianDiffusion:
         
         terms["loss"] = terms['mse'] + tT_loss + terms['embedding_loss'] + terms['token_loss']
 
-        #TODO: PLEASE CHECK THAT THE LOSS COULD GO TO NAN.
-        
         return terms
     
     def reconstruction_loss(self, x_t, padding_mask, get_fixations, ground_truth_scanpath):
@@ -958,7 +922,6 @@ class GaussianDiffusion:
         '''
         noise = th.randn_like(x_start_mean)
         assert noise.shape == x_start_mean.shape
-        # print(x_start_mean.device, noise.device)
         return (
             x_start_mean + std * noise
         )

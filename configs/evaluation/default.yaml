@@ -1,0 +1,4 @@
+_target_: src.evaluator.Evaluator
+eval_root_path: ${paths.output_dir}
+metrics_to_compute: ['multi_match', 'scan_match', 'scan_match_no_dur', 'sequence_score', 'sequence_score_time', 'distributions', 'kld'] # if empty then computes all implemented metrics
+data_to_extract: ['preds', 'qualitatives', 'metrics']

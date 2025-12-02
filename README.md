@@ -60,8 +60,8 @@ Download freeviewing and visual search [checkpoints](https://ailb-web.ing.unimor
 ```bash
 wget -O checkpoints.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/checkpoints.zip && unzip -j checkpoints.zip -d checkpoints && rm checkpoints.zip
 ```
-### 3️⃣ Download Task Embeddings
-Download [task embeddings](https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/data.zip) with the following command:
+### 3️⃣ Download Data
+Download [data](https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/data.zip) (~57 GB) with the following command:
 ```bash
 wget -O data.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/data.zip && unzip -j data.zip -d data && rm data.zip
 ```
@@ -70,10 +70,43 @@ At this point the project root should look like:
 ```shell
 ScanDiff/
 ├── data/
-│   └── task_embeddings.npy
+│     └── task_embeddings.npy
+|     └── osie/
+|     |    └── images/
+|     |    └── dinov2_base_timm_image_features/
+|     |    └── clusters_osie_512_384.npy
+|     |    └── processed_fixations/
+|     └── mit1003/
+|     |    └── images/
+|     |    └── dinov2_base_timm_image_features/
+|     |    └── clusters_mit1003_512_384.npy
+|     |    └── mit1003_fixations_train.json
+|     |    └── mit1003_fixations_validation.json
+|     |    └── mit1003_fixations_test.json
+|     └── coco_freeview/
+|     |    └── images/
+|     |    └── dinov2_base_timm_image_features/
+|     |    └── clusters_coco_freeview_512_384.npy
+|     |    └── COCOFreeView_fixations_train.json
+|     |    └── COCOFreeView_fixations_validation.json
+|     |    └── COCOFreeView_fixations_test.json
+|     └── cocosearch18/
+|     |    └── images_tp/
+|     |    └── images_ta/
+|     |    └── dinov2_base_timm_image_features_tp/
+|     |    └── dinov2_base_timm_image_features_ta/
+|     |    └── clusters_cocosearch18_tp_512_384.npy
+|     |    └── clusters_cocosearch18_ta_512_384.npy
+|     |    └── SemSS/
+|     |    └── coco_search18_fixations_TP_train.json
+|     |    └── coco_search18_fixations_TP_validation.json
+|     |    └── coco_search18_fixations_TP_test.json
+|     |    └── coco_search18_fixations_TA_train.json
+|     |    └── coco_search18_fixations_TA_validation.json
+|     |    └── coco_search18_fixations_TA_test.json
 └── checkpoints/
-    ├── scandiff_freeview.pth
-    └── scandiff_visualsearch.pth
+      ├── scandiff_freeview.pth
+      └── scandiff_visualsearch.pth
 ```
 ### 4️⃣ Quick Start!
 We provide a simple ```demo.py``` script to generate scanpaths for a certain image
@@ -88,10 +121,44 @@ python demo.py image_path=./sample_images/dog.jpg viewing_task="" checkpoint_pat
 python demo.py image_path=./sample_images/car.jpg viewing_task="car" checkpoint_path=./checkpoints/scandiff_visualsearch.pth num_output_scanpaths=10
 ```
 
+# Train the model
+To train ScanDiff run the following command:
+```bash
+./jobs/train.sh
+```
+The parameters of the configuration can be modified in   the ```/configs/train.yaml``` file. 
+
+#### Explanation of some training parameters:
+
+- ```data/train_datasets``` -> the combination of datasets on which the model is trained.
+- ```data/val_datasets``` -> the combination of datasets on which the model is validated. NB: only one dataset is supported. 
+- ```data/test_datasets``` -> the combination of datasets on which the model is tested. NB: only one dataset is supported. If you want to evaluate on more datasets after training just execute different parallel runs.
+- ```tags``` -> name of the experiment.
+- ```evaluation.data_to_extract``` -> data to save. It includes prediction, metrics and qualitative results.
+- ```evaluation.metrics_to_compute``` -> the metrics to be comnputed. NB: **'semantic_sequence_score'** and **'semantic_sequence_score_time'** can be computed only in the visual search setting. 
+- ```ckpt_path``` -> If set to null it means a training from scratch. By specifying a path, the training is resumed from that checkpoint.
+
+The default configuration trains the model in the freeviewing setting. To train it for the visual search task, you need to specify the correct training, validation and test datasets.
+
+This codebase also supports SLURM. If you want to run your experiments within a SLURM environment just set ```slurm=default``` in the ```train.yaml``` file and specify the **partition** and **account** parameters in the ```configs/slurm/default.yaml``` file.
+
+---
+# Evaluate the model
+To test the ScanDiff model run the following command:
+```bash
+./jobs/eval.sh
+```
+The parameters of the configuration can be modified in the ```/configs/eval.yaml``` file.
+
+### Explanation of some evaluation parameters:
+- ```ckpt_path``` -> The checkpoint to test.
+- ```evaluation.eval_root_path``` -> Directory path where to save the predictions, metrics or qualitatives.
+
+---
 ### 📝 TODO
 
-- [ ] Release data and train-val-test splits.
-- [ ] Release **training code** for ScanDiff.
+- [X] Release data and train-val-test splits.
+- [X] Release **training code** for ScanDiff.
 - [ ] Release **evaluation scripts** for benchmark comparisons.
 
 ## Citation
@@ -106,3 +173,6 @@ If you find this work useful for your research, please cite our paper:
   year={2025}
 }
 ```
+
+## Acknowledgments
+Thanks to [Lukas Ashleve](https://github.com/ashleve) for his [template](https://github.com/ashleve/lightning-hydra-template) that inspired this repository.

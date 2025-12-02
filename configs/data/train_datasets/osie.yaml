@@ -7,6 +7,5 @@ osie:
   num_subjects: 10
   time_in_ms: false
   use_abs_coords: true
-  remove_first_fix: false
-  task_embeddings_file: standard_roberta_embeddings.npy
+  task_embeddings_file: task_embeddings.npy
   img_features_dir: dinov2_base_timm_image_features

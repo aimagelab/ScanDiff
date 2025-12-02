@@ -93,8 +93,6 @@ def instantiate_datasets(dataset_cfg: DictConfig) -> Dict[str, List]:
                 dataset_cfg[key][d].time_in_ms = time_in_ms
                 dataset_cfg[key][d].use_abs_coords = use_abs_coords
                 dataset_cfg[key][d].task_embeddings_file = task_embeddings_file
-                if 'mit1003' in dataset_cfg.train_datasets or 'coco_freeview' in dataset_cfg.train_datasets:
-                    dataset_cfg[key][d].img_features_dir = img_features_dir
                 
                 datasets[key].append(
                     hydra.utils.instantiate(dataset_cfg[key][d], _recursive_=True)

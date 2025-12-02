@@ -7,5 +7,5 @@ cocosearch18_ta:
   num_subjects: 10 # each image was viewed by 10 users. Generate 10 scanpaths for each image during generation.
   time_in_ms: false
   use_abs_coords: true
-  task_embeddings_file: embeddings.npy
+  task_embeddings_file: task_embeddings.npy
   img_features_dir: dinov2_base_timm_image_features_ta

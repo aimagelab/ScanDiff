@@ -28,7 +28,6 @@ class UnifiedDataModule:
         pin_memory: bool = False,
         drop_last: bool = False,
         task_embeddings_file: str = None,
-        img_features_dir: str = None,
     ) -> None:
         super().__init__()
 
@@ -50,7 +49,6 @@ class UnifiedDataModule:
         self.data_train = None
         self.data_test = None
         self.task_embeddings_file = task_embeddings_file
-        self.img_features_dir = img_features_dir
 
     def setup(self):
         # Load and split datasets only if not loaded already

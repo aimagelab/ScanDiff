@@ -4,8 +4,8 @@ defaults:
   - diffusion: default
   - diffusion_class: spaced_diffusion
 
-image_path: "./sample_images/car.jpg"
-viewing_task: "car"  # empty string for freeviewing, or one of the 18 Coco-Search categories
-checkpoint_path: "./checkpoints/scandiff_visualsearch.pth"
+image_path: "./sample_images/dog.jpg"
+viewing_task: ""  # empty string for freeviewing, or one of the 18 Coco-Search categories
+checkpoint_path: "./checkpoints/scandiff_freeview.pth"
 task_embeddings_path: "./data/task_embeddings.npy"
 num_output_scanpaths: 10

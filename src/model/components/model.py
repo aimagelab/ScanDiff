@@ -107,7 +107,7 @@ class DiTBlockDefaultUntilNow(nn.Module):
     def __init__(self, hidden_size, num_heads, mlp_ratio=4.0, **block_kwargs):
         super().__init__()
         self.norm1 = nn.LayerNorm(hidden_size, elementwise_affine=False, eps=1e-6)
-        self.attn = MultiheadAttention(hidden_size, num_heads, batch_first=True) #TODO: REVIEW DROPOUT
+        self.attn = MultiheadAttention(hidden_size, num_heads, batch_first=True)
         self.cross_attn = MultiheadAttention(hidden_size, num_heads, batch_first=True)
         
         self.norm2 = nn.LayerNorm(hidden_size, elementwise_affine=False, eps=1e-6)
@@ -130,7 +130,7 @@ class DiTBlockDefaultUntilNow(nn.Module):
         q = self.norm2(out)
         k = v = c
         out2 = self.cross_attn(q, k , v)[0]
-        out = out + out2 #TODO: REVIEW IF SOME DROPOUT IS NEEDED
+        out = out + out2
         
         out3 = self.mlp(self.norm3(out))
         out = out + out3
@@ -206,20 +206,16 @@ class DiT(nn.Module):
     """
     def __init__(
         self,
-        max_len=40,
-        spatial_dim=(20,32),
-        input_size=32,
+        max_len=16,
+        spatial_dim=(37,37),
         patch_size=2,
         in_channels=4,
-        scanpath_emb_size=128,
+        scanpath_emb_size=256,
         hidden_size=512,
-        img_feature_dim=2048,
-        text_feature_dim=768,
+        img_feature_dim=768,
         depth=6,
         num_heads=8,
         mlp_ratio=4.0,
-        class_dropout_prob=0.1,
-        num_classes=1000,
         learn_sigma=False,
     ):
         super().__init__()
@@ -238,11 +234,11 @@ class DiT(nn.Module):
         self.t_embedder = TimestepEmbedder(hidden_size)
         self.pos_embed = PositionEmbeddingSine1d(max_len=max_len)
         self.img_patch_pos = PositionEmbeddingSine2d(spatial_dim, hidden_size)
-        self.img_proj = nn.Linear(img_feature_dim, hidden_size) #TODO: FIX HARD CODING
+        self.img_proj = nn.Linear(img_feature_dim, hidden_size)
         
         self.scanpath_embedding = nn.Linear(3, scanpath_emb_size)
         
-        self.input_up_proj = nn.Linear(scanpath_emb_size, hidden_size) # x, y, time #TODO: USE A COMBINATION OF LINEAR, TANH, LINEAR AS IN DIFFUSEQ PAPER
+        self.input_up_proj = nn.Linear(scanpath_emb_size, hidden_size)
         
         last_layer_dim = hidden_size * 2 if learn_sigma else hidden_size
         self.output_down_proj = nn.Linear(last_layer_dim, scanpath_emb_size) 
@@ -255,22 +251,6 @@ class DiT(nn.Module):
         self.final_layer = FinalLayer(hidden_size, self.output_size)
         
         self.token_validity_predictor = nn.Linear(scanpath_emb_size, 2) # 2 classes: padding or valid token for the scanpath
-    
-    
-    def unpatchify(self, x):
-        """
-        x: (N, T, patch_size**2 * C)
-        imgs: (N, H, W, C)
-        """
-        c = self.out_channels
-        p = self.x_embedder.patch_size[0]
-        h = w = int(x.shape[1] ** 0.5)
-        assert h * w == x.shape[1]
-
-        x = x.reshape(shape=(x.shape[0], h, w, p, p, c))
-        x = torch.einsum('nhwpqc->nchpwq', x)
-        imgs = x.reshape(shape=(x.shape[0], c, h * p, h * p))
-        return imgs
 
     def forward(self, x, t, y):
         """
@@ -374,52 +354,3 @@ def get_1d_sincos_pos_embed_from_grid(embed_dim, pos):
 
     emb = np.concatenate([emb_sin, emb_cos], axis=1)  # (M, D)
     return emb
-
-
-#################################################################################
-#                                   DiT Configs                                  #
-#################################################################################
-
-def DiT_XL_2(**kwargs):
-    return DiT(depth=28, hidden_size=1152, patch_size=2, num_heads=16, **kwargs)
-
-def DiT_XL_4(**kwargs):
-    return DiT(depth=28, hidden_size=1152, patch_size=4, num_heads=16, **kwargs)
-
-def DiT_XL_8(**kwargs):
-    return DiT(depth=28, hidden_size=1152, patch_size=8, num_heads=16, **kwargs)
-
-def DiT_L_2(**kwargs):
-    return DiT(depth=24, hidden_size=1024, patch_size=2, num_heads=16, **kwargs)
-
-def DiT_L_4(**kwargs):
-    return DiT(depth=24, hidden_size=1024, patch_size=4, num_heads=16, **kwargs)
-
-def DiT_L_8(**kwargs):
-    return DiT(depth=24, hidden_size=1024, patch_size=8, num_heads=16, **kwargs)
-
-def DiT_B_2(**kwargs):
-    return DiT(depth=12, hidden_size=768, patch_size=2, num_heads=12, **kwargs)
-
-def DiT_B_4(**kwargs):
-    return DiT(depth=12, hidden_size=768, patch_size=4, num_heads=12, **kwargs)
-
-def DiT_B_8(**kwargs):
-    return DiT(depth=12, hidden_size=768, patch_size=8, num_heads=12, **kwargs)
-
-def DiT_S_2(**kwargs):
-    return DiT(depth=12, hidden_size=384, patch_size=2, num_heads=6, **kwargs)
-
-def DiT_S_4(**kwargs):
-    return DiT(depth=12, hidden_size=384, patch_size=4, num_heads=6, **kwargs)
-
-def DiT_S_8(**kwargs):
-    return DiT(depth=12, hidden_size=384, patch_size=8, num_heads=6, **kwargs)
-
-
-DiT_models = {
-    'DiT-XL/2': DiT_XL_2,  'DiT-XL/4': DiT_XL_4,  'DiT-XL/8': DiT_XL_8,
-    'DiT-L/2':  DiT_L_2,   'DiT-L/4':  DiT_L_4,   'DiT-L/8':  DiT_L_8,
-    'DiT-B/2':  DiT_B_2,   'DiT-B/4':  DiT_B_4,   'DiT-B/8':  DiT_B_8,
-    'DiT-S/2':  DiT_S_2,   'DiT-S/4':  DiT_S_4,   'DiT-S/8':  DiT_S_8,
-}

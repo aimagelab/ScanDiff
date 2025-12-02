@@ -101,7 +101,6 @@ def main(cfg: DictConfig):
             initial_noise,
             clip_denoised=False,
             model_kwargs=model_kwargs,
-            firstfix=None,
             progress=True,
             device='cuda',
         )

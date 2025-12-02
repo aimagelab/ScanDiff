@@ -19,7 +19,6 @@ class CustomSpacedDiffusion(SpacedDiffusion):
             model_kwargs = {}
             
         padding_mask = model_kwargs.pop('padding_mask').to(x_start.device)
-        force_initial_central_fixation = model_kwargs.pop('force_initial_central_fixation')
         
         gt_scanpath = x_start
         
@@ -38,10 +37,6 @@ class CustomSpacedDiffusion(SpacedDiffusion):
             noise = th.randn_like(x_start)
         
         x_t = self.q_sample(x_start, t, noise=noise)
-        
-        if force_initial_central_fixation:
-            x_t[:, 0] = x_start[:, 0]
-        
 
         terms = {}
 
@@ -86,10 +81,7 @@ class CustomSpacedDiffusion(SpacedDiffusion):
             
             
             # Loss 1: Mean Squared Error (MSE) (L_{VLB})
-            if force_initial_central_fixation:
-                terms["mse"] = mean_flat((target[:,1:] - model_output[:,1:]) ** 2) # this is the L_simple loss
-            else:
-                terms["mse"] = mean_flat((target - model_output) ** 2) # this is the L_simple loss
+            terms["mse"] = mean_flat((target - model_output) ** 2) # this is the L_simple loss
             
             model_out_x_start = self._x0_helper(model_output, x_t, t)['pred_xstart']
             
@@ -105,15 +97,9 @@ class CustomSpacedDiffusion(SpacedDiffusion):
             
             get_fixations = model.model.get_coords_and_time
             
-            if force_initial_central_fixation:
-                terms['reg_loss'], terms['t_loss'] = self.reconstruction_loss(x_start[:,1:], padding_mask[:,1:], get_fixations, gt_scanpath[:,1:])
-                terms['token_loss'] = self.token_validity_loss(x_start[:,1:], model.model.token_validity_predictor, padding_mask[:,1:])
-            else:
-                terms['reg_loss'], terms['t_loss'] = self.reconstruction_loss(x_start, padding_mask, get_fixations, gt_scanpath)
-                terms['token_loss'] = self.token_validity_loss(x_start, model.model.token_validity_predictor, padding_mask)
+            terms['reg_loss'], terms['t_loss'] = self.reconstruction_loss(x_start, padding_mask, get_fixations, gt_scanpath)
+            terms['token_loss'] = self.token_validity_loss(x_start, model.model.token_validity_predictor, padding_mask)
             
-        
-        
         if self.compute_T_loss:
             terms["loss"] = terms['mse'] + tT_loss + terms['reg_loss'] + terms['t_loss'] + terms['token_loss']
         else:

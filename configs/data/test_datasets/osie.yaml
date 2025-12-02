@@ -7,8 +7,7 @@ osie:
   num_subjects: 10
   time_in_ms: false
   use_abs_coords: true
-  remove_first_fix: false
   threshold: 0.332 # this is the human consistency score. Human evaluation of SS Time 
   threshold_no_dur: 0.345 # this is the human consistency score. Human evaluation of SS Time 
-  task_embeddings_file: standard_roberta_embeddings.npy
+  task_embeddings_file: task_embeddings.npy
   img_features_dir: dinov2_base_timm_image_features

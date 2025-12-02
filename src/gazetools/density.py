@@ -97,11 +97,6 @@ def compute_marks_density_chart(
     ],  # | List[Tuple[str, List[float], List[float]]]
     save_path: str,
 ):
-    # if isinstance(generated, list):
-    #     data = [
-    #         ("Human", originals[0], originals[1], "b"),
-    #     ] + list(map(lambda x: (x[0], x[1], x[2], "r"), generated))
-    # else:
     data = [
         ("Human", originals[0], originals[1], "b"),
         ("Generated", generated[0], generated[1], "r"),

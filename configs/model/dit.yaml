@@ -1,4 +1,4 @@
-_target_: src.model.components.dit_big_autoencoder.DiTBigAutoencoder
+_target_: src.model.components.dit_model.DiTModel
 encoder:
   _target_: src.model.components.autoencoder.Encoder
   encoder_dimensions: [3, 128, 256]
