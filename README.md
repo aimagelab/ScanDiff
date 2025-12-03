@@ -135,7 +135,7 @@ The parameters of the configuration can be modified in   the ```/configs/train.y
 - ```data/test_datasets``` -> the combination of datasets on which the model is tested. NB: only one dataset is supported. If you want to evaluate on more datasets after training just execute different parallel runs.
 - ```tags``` -> name of the experiment.
 - ```evaluation.data_to_extract``` -> data to save. It includes prediction, metrics and qualitative results.
-- ```evaluation.metrics_to_compute``` -> the metrics to be comnputed. NB: **'semantic_sequence_score'** and **'semantic_sequence_score_time'** can be computed only in the visual search setting. 
+- ```evaluation.metrics_to_compute``` -> the metrics to be computed. NB: **'semantic_sequence_score'** and **'semantic_sequence_score_time'** can be computed only in the visual search setting. 
 - ```ckpt_path``` -> If set to null it means a training from scratch. By specifying a path, the training is resumed from that checkpoint.
 
 The default configuration trains the model in the freeviewing setting. To train it for the visual search task, you need to specify the correct training, validation and test datasets.
@@ -159,7 +159,7 @@ The parameters of the configuration can be modified in the ```/configs/eval.yaml
 
 - [X] Release data and train-val-test splits.
 - [X] Release **training code** for ScanDiff.
-- [ ] Release **evaluation scripts** for benchmark comparisons.
+- [X] Release **evaluation scripts** for benchmark comparisons.
 
 ## Citation
 
