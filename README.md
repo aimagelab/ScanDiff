@@ -177,7 +177,7 @@ The parameters of the configuration can be modified in the ```/configs/eval.yaml
 
 - [X] Release data and train-val-test splits.
 - [X] Release **training code** for ScanDiff.
-- [ ] Release **evaluation scripts** for benchmark comparisons.
+- [X] Release **evaluation scripts** for benchmark comparisons.
 
 ## Citation
 
