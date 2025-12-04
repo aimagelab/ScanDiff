@@ -61,9 +61,27 @@ Download freeviewing and visual search [checkpoints](https://ailb-web.ing.unimor
 wget -O checkpoints.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/checkpoints.zip && unzip -j checkpoints.zip -d checkpoints && rm checkpoints.zip
 ```
 ### 3️⃣ Download Data
-Download [data](https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/data.zip) (~57 GB) with the following command:
+Download [data](https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/data.zip) (~53 GB) with the following command. It also containes the pre-computed visual features from DINOv2.
 ```bash
 wget -O data.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/data.zip && unzip -j data.zip -d data && rm data.zip
+```
+If you have disk limitations, it is also possible to download the datasets separately:
+
+- COCOFreeView (~22 GB):
+```bash
+wget -O coco_freeview.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/coco_freeview.zip && unzip -j coco_freeview.zip -d coco_freeview && rm coco_freeview.zip
+```
+- COCOSearch18 (~25 GB):
+```bash
+wget -O cocosearch18.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/cocosearch18.zip && unzip -j cocosearch18.zip -d cocosearch18 && rm cocosearch18.zip
+```
+- MIT1003 (~3.8 GB):
+```bash
+wget -O mit1003.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/mit1003.zip && unzip -j mit1003.zip -d mit1003 && rm mit1003.zip
+```
+- OSIE (~2.6 GB):
+```bash
+wget -O osie.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/osie.zip && unzip -j osie.zip -d osie && rm osie.zip
 ```
 
 At this point the project root should look like:
@@ -135,7 +153,7 @@ The parameters of the configuration can be modified in   the ```/configs/train.y
 - ```data/test_datasets``` -> the combination of datasets on which the model is tested. NB: only one dataset is supported. If you want to evaluate on more datasets after training just execute different parallel runs.
 - ```tags``` -> name of the experiment.
 - ```evaluation.data_to_extract``` -> data to save. It includes prediction, metrics and qualitative results.
-- ```evaluation.metrics_to_compute``` -> the metrics to be computed. NB: **'semantic_sequence_score'** and **'semantic_sequence_score_time'** can be computed only in the visual search setting. 
+- ```evaluation.metrics_to_compute``` -> the metrics to be comnputed. NB: **'semantic_sequence_score'** and **'semantic_sequence_score_time'** can be computed only in the visual search setting. 
 - ```ckpt_path``` -> If set to null it means a training from scratch. By specifying a path, the training is resumed from that checkpoint.
 
 The default configuration trains the model in the freeviewing setting. To train it for the visual search task, you need to specify the correct training, validation and test datasets.
@@ -159,7 +177,7 @@ The parameters of the configuration can be modified in the ```/configs/eval.yaml
 
 - [X] Release data and train-val-test splits.
 - [X] Release **training code** for ScanDiff.
-- [X] Release **evaluation scripts** for benchmark comparisons.
+- [ ] Release **evaluation scripts** for benchmark comparisons.
 
 ## Citation
 
