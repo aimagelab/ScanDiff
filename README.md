@@ -58,7 +58,7 @@ For more details, visit the [Hydra documentation](https://hydra.cc/docs/intro/)!
 ### 2️⃣ Download Checkpoints
 Download freeviewing and visual search [checkpoints](https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/checkpoints.zip) with the following command:
 ```bash
-wget -O checkpoints.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/checkpoints.zip && unzip checkpoints.zip -d checkpoints
+wget -O checkpoints.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/checkpoints.zip && unzip checkpoints.zip
 ```
 ### 3️⃣ Download Data
 Download [data](https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/data.zip) (~53 GB) with the following command. It also containes the pre-computed visual features from DINOv2.
