@@ -58,30 +58,30 @@ For more details, visit the [Hydra documentation](https://hydra.cc/docs/intro/)!
 ### 2️⃣ Download Checkpoints
 Download freeviewing and visual search [checkpoints](https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/checkpoints.zip) with the following command:
 ```bash
-wget -O checkpoints.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/checkpoints.zip && unzip -j checkpoints.zip -d checkpoints && rm checkpoints.zip
+wget -O checkpoints.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/checkpoints.zip && unzip checkpoints.zip -d checkpoints
 ```
 ### 3️⃣ Download Data
 Download [data](https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/data.zip) (~53 GB) with the following command. It also containes the pre-computed visual features from DINOv2.
 ```bash
-wget -O data.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/data.zip && unzip -j data.zip -d data && rm data.zip
+wget -O data.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/data.zip && unzip data.zip -d data
 ```
 If you have disk limitations, it is also possible to download the datasets separately:
 
 - COCOFreeView (~22 GB):
 ```bash
-wget -O coco_freeview.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/coco_freeview.zip && unzip -j coco_freeview.zip -d coco_freeview && rm coco_freeview.zip
+wget -O coco_freeview.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/coco_freeview.zip && unzip coco_freeview.zip -d coco_freeview
 ```
 - COCOSearch18 (~25 GB):
 ```bash
-wget -O cocosearch18.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/cocosearch18.zip && unzip -j cocosearch18.zip -d cocosearch18 && rm cocosearch18.zip
+wget -O cocosearch18.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/cocosearch18.zip && unzip cocosearch18.zip -d cocosearch18
 ```
 - MIT1003 (~3.8 GB):
 ```bash
-wget -O mit1003.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/mit1003.zip && unzip -j mit1003.zip -d mit1003 && rm mit1003.zip
+wget -O mit1003.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/mit1003.zip && unzip mit1003.zip -d mit1003
 ```
 - OSIE (~2.6 GB):
 ```bash
-wget -O osie.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/osie.zip && unzip -j osie.zip -d osie && rm osie.zip
+wget -O osie.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/osie.zip && unzip osie.zip -d osie
 ```
 
 At this point the project root should look like:
