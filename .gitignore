@@ -1,6 +1,5 @@
 logs/
 wandb/
-data/
 outputs/
 *.pyc
 __pycache__/
