@@ -85,9 +85,7 @@ class COCOSearch18TargetPresentDataset:
             scanpath[:,0] /= 512
             scanpath[:,1] /= 320
         
-        #durations = np.hstack((sample['arrival_times'], sample['t_end']))[1:] - sample['arrival_times']
-        #durations = np.reshape(durations, (-1, 1))
-        #scanpath = np.hstack((coords, durations))
+
         scanpath = torch.from_numpy(scanpath).float() # gt duration is in seconds
         
         if not self.time_in_ms: # by default time is in milliseconds in the annotations

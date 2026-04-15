@@ -18,19 +18,8 @@ class COCOSearch18TargetAbsentDataset:
         if split == 'valid':
             split = 'validation'
         
-        if split in ['train', 'validation']:
-            with open(Path(self.root_path, f'coco_search18_fixations_TA_trainval.json'), 'rb') as f: # here each scanpath starts from the second fixation. The first is discarded
-                self.samples = json.load(f)
-                
-            # only consider the right split
-            if split == 'train':
-                self.samples = [s for s in self.samples if s['split'] == 'train']
-            else:
-                self.samples = [s for s in self.samples if s['split'] == 'validation']
-                
-        else: # test split
-            with open(Path(self.root_path, f'coco_search18_fixations_TA_test.json'), 'rb') as f: # here each scanpath starts from the second fixation. The first is discarded
-                self.samples = json.load(f)
+        with open(Path(self.root_path, f'coco_search18_fixations_TA_{split}.json'), 'rb') as f:
+            self.samples = json.load(f)
             
         self.task_embeddings = np.load(
             open(
@@ -95,12 +84,8 @@ class COCOSearch18TargetAbsentDataset:
             scanpath[:,0] /= 1680
             scanpath[:,1] /= 1050
         
-        #durations = np.hstack((sample['arrival_times'], sample['t_end']))[1:] - sample['arrival_times']
-        #durations = np.reshape(durations, (-1, 1))
-        #scanpath = np.hstack((coords, durations))
         scanpath = torch.from_numpy(scanpath).float() # gt duration is in seconds
         
-
         if not self.time_in_ms: # by default time is in milliseconds in the annotations
             scanpath[:,2] /= 1000.0
         
