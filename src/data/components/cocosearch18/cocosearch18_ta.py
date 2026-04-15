@@ -69,14 +69,12 @@ class COCOSearch18TargetAbsentDataset:
         img_features_path = Path(self.root_path, self.img_features_dir, task_string, Path(img_filename).stem + '.pth')
         img_feats = torch.load(img_features_path).unsqueeze(0)
         
-        #if self.split == 'train' or self.split == 'val':
         num_fixations = len(sample['X'])
         x = sample['X']
         y = sample['Y']
         t = sample['T'][:num_fixations]
         
-        scanpath = np.stack((x,y,t)).T # coords are in range [512x320]
-        #coords = (coords + 1) / 2 #put in range [0,1]
+        scanpath = np.stack((x,y,t)).T
         
         if not self.use_abs_coords:
             # coords in the original json file for TA are in range [1680, 1050]

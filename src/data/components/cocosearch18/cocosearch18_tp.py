@@ -76,8 +76,7 @@ class COCOSearch18TargetPresentDataset:
         y = sample['Y']
         t = sample['T'][:num_fixations]
         
-        scanpath = np.stack((x,y,t)).T # coords are in range [512x320]
-        #coords = (coords + 1) / 2 #put in range [0,1]
+        scanpath = np.stack((x,y,t)).T
         
         if not self.use_abs_coords:
             #in the json file coords for TP are in range [512x320]
