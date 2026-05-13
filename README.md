@@ -61,6 +61,9 @@ Download freeviewing and visual search [checkpoints](https://ailb-web.ing.unimor
 wget -O checkpoints.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/checkpoints.zip && unzip checkpoints.zip
 ```
 ### 3️⃣ Download Data
+If you want to try the demo, download the [task embeddings](https://github.com/aimagelab/ScanDiff/releases/download/v0.0.1/task_embeddings.npy) without having to download the whole data package.
+
+
 Download [data](https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/data.zip) (~53 GB) with the following command. It also containes the pre-computed visual features from DINOv2.
 ```bash
 wget -O data.zip https://ailb-web.ing.unimore.it/publicfiles/ScanDiff_ICCV2025/data.zip && unzip data.zip -d data
